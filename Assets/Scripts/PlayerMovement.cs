@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject textbox; //WILL BE REMOVED AT A LATER POINT
+
     private float plVelocityX = 0f;
     private float plVelocityY = 0f;
 
@@ -34,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
         isJumping = false;
         allowInput = true;
         stasis = false;
+
+        textbox.GetComponent<TextDisplay>().StartDialogue(0);
     }
 
     public void SetSpawn(float xPos, float yPos) {
