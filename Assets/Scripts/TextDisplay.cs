@@ -1,15 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using TMPro;
 
 public class TextDisplay : MonoBehaviour
 {
     private char[] textPull = new char[8];
-    private List<GameObject> enemyList = new List<GameObject>();
-
-    public GameObject BatPrefab;
 
     private string debugText = "This is debug text. The word |bat/ should be red and spawn a bat."; //<color=red>text</color>
     private int indexNum = 0; //used to keep track of next letter to print
@@ -17,33 +13,27 @@ public class TextDisplay : MonoBehaviour
 
     private string pullText = "";
     private string printText;
+    private bool framePause = false; //used to pause text scroll by one frame
 
     private int indexPull = 0; //used in pulling item or enemy name when highlighted text pops up
 
     public TMP_Text textBox;
+    public EnemySpawner mobs;
 
     public void StartDialogue(int pullNum) {
         //pullNum will be used to retrieve dialogue by index later in development
         pullText = debugText;
         length = pullText.Length;
         indexNum = 0;
-    }
-
-    public void ClearEnemies() { //WILL BE MOVED TO A SEPARATE SCRIPT LATER
-        for (int i = enemyList.Count-1; i >= 0; i--) {
-            Destroy(enemyList[i]);
-            enemyList.RemoveAt(i);
-        }
+        mobs.ClearEnemies();
     }
 
     private void PrintDialogue() {
         if(pullText[indexNum] == '|') {
             indexPull = indexNum+1;
         } else if(pullText[indexNum] == '/') {
-            if(pullText.Substring(indexPull,indexNum-indexPull).Equals("bat", StringComparison.OrdinalIgnoreCase)) { //https://www.delftstack.com/howto/csharp/compare-two-strings-ignoring-case-in-csharp/
-                GameObject newEnemy = Instantiate(BatPrefab, new Vector3(3,0,0), Quaternion.identity);
-                enemyList.Add(newEnemy);
-                //Debug.Log(pullText.Substring(indexPull,indexNum-indexPull));
+            if(!mobs.SpawnEnemy(new Vector3(3,0,0), pullText.Substring(indexPull,indexNum-indexPull))) {
+                Debug.Log("Mob \""+pullText.Substring(indexPull,indexNum-indexPull)+"\" could not be pulled from memory.");
             }
         }
 
@@ -60,10 +50,15 @@ public class TextDisplay : MonoBehaviour
         StartDialogue(0);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(indexNum < pullText.Length) {
-            PrintDialogue();
+            if(!framePause) {
+                PrintDialogue();
+            }
+            framePause = !framePause;
+        } else {
+            framePause = false;
         }
     }
 }

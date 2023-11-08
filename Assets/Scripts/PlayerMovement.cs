@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
                     case 1:
                         if(plVelocityY < 0) { //player needs to be moving down for this collision
                             plVelocityY = 0;
-                            transform.position = new Vector2(transform.position.x, contactPoint.y+playerSize.y/2f); //snap to floor opon collision
+                            transform.position = new Vector2(transform.position.x, contactPoint.y+playerSize.y/2f); //snap to floor upon collision
                             //Debug.Log("Player BoxCastAll: Collision " + (i+1) + " Snapped Player To " + transform.position);
                             Landed();
                             break;
@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
                     case -1:
                         if(plVelocityX > 0) { //player needs to be moving right for this collision
                             plVelocityX = 0;
-                            transform.position = new Vector2(contactPoint.x-playerSize.x/2f, transform.position.y); //snap to ceiling upon collision
+                            transform.position = new Vector2(contactPoint.x-playerSize.x/2f, transform.position.y); //snap to left wall upon collision
                             //Debug.Log("Player BoxCastAll: Collision " + (i+1) + " Snapped Player To " + transform.position);
                             break;
                         } else {
@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
                     case 1:
                         if(plVelocityX < 0) { //player needs to be moving left for this collision
                             plVelocityX = 0;
-                            transform.position = new Vector2(contactPoint.x+playerSize.x/2f, transform.position.y); //snap to floor opon collision
+                            transform.position = new Vector2(contactPoint.x+playerSize.x/2f, transform.position.y); //snap to right wall upon collision
                             //Debug.Log("Player BoxCastAll: Collision " + (i+1) + " Snapped Player To " + transform.position);
                             break;
                         } else {
