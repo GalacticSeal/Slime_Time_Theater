@@ -968,8 +968,8 @@ Transform:
   m_GameObject: {fileID: 532171398}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: -1.25, z: 0}
+  m_LocalScale: {x: 2, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1596,6 +1596,18 @@ PrefabInstance:
     - target: {fileID: 3662153505072714497, guid: 2bcc7f9cbeaeea949aa5c5d972b08714, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083242394806344925, guid: 2bcc7f9cbeaeea949aa5c5d972b08714, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248387764307697712, guid: 2bcc7f9cbeaeea949aa5c5d972b08714, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6248387764307697712, guid: 2bcc7f9cbeaeea949aa5c5d972b08714, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8578061889869173380, guid: 2bcc7f9cbeaeea949aa5c5d972b08714, type: 3}
       propertyPath: m_LocalPosition.x

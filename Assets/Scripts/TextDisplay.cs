@@ -26,6 +26,8 @@ public class TextDisplay : MonoBehaviour
         length = pullText.Length;
         indexNum = 0;
         mobs.ClearEnemies();
+        GameObject Wand = GameObject.FindWithTag("PlayerWand");
+        Wand.GetComponent<WandAiming>().ClearProj();
     }
 
     private void PrintDialogue() {

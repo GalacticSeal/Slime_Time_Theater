@@ -40,9 +40,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void DeleteEnemy(GameObject deadEnemy) {
+        enemyList.Remove(deadEnemy); //GameObject is removed from the list first to avoid null, as the location in memory is being pulled rather than the index in the list
+        Destroy(deadEnemy);
     }
 }

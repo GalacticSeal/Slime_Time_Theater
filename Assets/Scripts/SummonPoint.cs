@@ -54,7 +54,7 @@ public class SummonPoint : MonoBehaviour
             } else {
                 GameObject newEnemy = Instantiate(Mob, new Vector3(transform.position.x, transform.position.y, 0f), Quaternion.identity); //destroy portal and summon enemy
                 Spawner.GetComponent<EnemySpawner>().enemyList.Add(newEnemy);
-                gameObject.SetActive(false); //disables itself instead of deleting to avoid potential errors when mass deleting mobs from list
+                Spawner.GetComponent<EnemySpawner>().DeleteEnemy(gameObject);
             }
         }
     }

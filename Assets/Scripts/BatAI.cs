@@ -12,6 +12,7 @@ public class BatAI : MonoBehaviour
     private LayerMask terrainMask;
     private RaycastHit2D[] hitArray = new RaycastHit2D[2];
     private BoxCollider2D hitbox;
+    
 
     private void Start() {
         Player = GameObject.FindWithTag("Player");

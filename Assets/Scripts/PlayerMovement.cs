@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float gravity = 0.01f;
 
     private Vector2 playerSize;
-    private LayerMask terrainMask;
+    private LayerMask terrainMask, enemyMask;
     private RaycastHit2D[] hitArray = new RaycastHit2D[2];
 
     private BoxCollider2D hitbox;
@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         hitbox = GetComponent<BoxCollider2D>();
         playerSize = hitbox.bounds.size;
         terrainMask = LayerMask.GetMask("Terrain");
+        enemyMask = LayerMask.GetMask("Enemy");
 
         spawnPosX = transform.position.x;
         spawnPosY = transform.position.y;
@@ -87,12 +88,10 @@ public class PlayerMovement : MonoBehaviour
 
             //Detect all current terrain collisions
             hitArray = Physics2D.BoxCastAll(hitbox.bounds.center, playerSize, 0f, new Vector2(0f,0f), playerSize.x/2f, terrainMask, -0.1f, 0.1f);
+            isGrounded = false; //for indicating the player is not grounded if no collision below the player is detected 
+            
             for(int i = 0; i < hitArray.Length; i++) {
-                //Debug.Log("Player BoxCastAll: Collision " + (i+1) + " Normal -> " + hitArray[i].normal);
 
-                isGrounded = false; //for indicating the player is not grounded if no collision below the player is detected
-
-                //Check for vertical collision data
                 Vector2 contactPoint = hitArray[i].point;
                 switch((int) Mathf.Ceil(hitArray[i].normal.y)) { //Positive y on normal means the collision was below due to the normal being outward from the collision point
                     case -1:
@@ -147,6 +146,11 @@ public class PlayerMovement : MonoBehaviour
                         //Debug.Log("Player BoxCastAll: Collision " + (i+1) + " Not A Horizontal Hit");
                         break;
                 }
+            }
+
+            RaycastHit2D hit = Physics2D.BoxCast(hitbox.bounds.center, playerSize*0.9f, 0f, new Vector2(0f,0f), playerSize.x*0.9f/2, enemyMask, -0.1f, 0.1f);
+            if(hit.collider != null) {
+                Respawn();
             }
         }
     }
